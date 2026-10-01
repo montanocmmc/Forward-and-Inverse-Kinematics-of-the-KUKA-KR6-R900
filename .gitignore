@@ -1,0 +1,17 @@
+# Archivos generados por ROS 2 y colcon
+/build/
+/install/
+/log/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Dependencia externa: se descargará con su versión fijada
+/src/kuka_robot_descriptions/
+
+# Archivos temporales de editores
+*~
+*.swp

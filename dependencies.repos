@@ -1,0 +1,5 @@
+repositories:
+  kuka_robot_descriptions:
+    type: git
+    url: https://github.com/kroshu/kuka_robot_descriptions.git
+    version: f0202b281d40d16c90ceeed23d1a9548dd0c3981
