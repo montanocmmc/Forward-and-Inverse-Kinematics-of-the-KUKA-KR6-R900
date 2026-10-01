@@ -201,3 +201,30 @@ la configuración inicial.
 
 Las carpetas build/, install/ y log/ se generan localmente y no se incluyen
 en el repositorio. El modelo KUKA se descarga mediante dependencies.repos.
+
+## Pruebas matemáticas automatizadas
+
+Desde la raíz del proyecto:
+
+```bash
+source entorno.sh
+cd src/grupo03_kuka_kr6_kinematics
+python3 -m pytest -q test/test_kinematics.py
+```
+
+Si pytest no está instalado:
+
+```bash
+sudo apt install python3-pytest
+```
+
+Se incluyen 10 pruebas:
+- Tres comparaciones de FK con posiciones registradas de TF.
+- Cuatro comparaciones del Jacobiano con diferencias finitas.
+- Tres comprobaciones de IK, tolerancia y límites articulares.
+
+Resultado registrado: 10 pruebas satisfactorias.
+
+También se verificó la compilación de los cuatro paquetes desde una
+copia nueva del repositorio en la misma computadora con Ubuntu 24.04
+y ROS 2 Jazzy.
