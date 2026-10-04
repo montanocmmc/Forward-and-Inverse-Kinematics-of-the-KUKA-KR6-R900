@@ -13,7 +13,7 @@ manipulador de seis articulaciones, con ROS 2 Jazzy y visualización en RViz2.
 
 - Cinemática directa mediante Denavit–Hartenberg estándar.
 - Pose de tool0 expresada respecto a base_link.
-- Jacobiano geométrico de posición de tamaño 3×6.
+- Jacobiano geométrico completo de tamaño 6×6; la IK utiliza su bloque de posición 3×6.
 - Cinemática inversa mediante mínimos cuadrados amortiguados (DLS).
 - Límites articulares y comprobación de convergencia.
 - Publicación de la pose mediante /fk_pose.
@@ -228,3 +228,24 @@ Resultado registrado: 10 pruebas satisfactorias.
 También se verificó la compilación de los cuatro paquetes desde una
 copia nueva del repositorio en la misma computadora con Ubuntu 24.04
 y ROS 2 Jazzy.
+
+## Organización del código para la exposición
+
+Los dos archivos principales están en
+`src/grupo03_kuka_kr6_kinematics/grupo03_kuka_kr6_kinematics/`:
+
+- `fk.py`: matrices DH explícitas A1–A6, transformaciones de base y herramienta,
+  cinemática directa, conversión a cuaternión y nodo que publica `/fk_pose`.
+- `ik.py`: Jacobiano geométrico 6×6, solver DLS de posición y nodo que recibe
+  `/target` y publica `/joint_states`. Reutiliza las matrices de `fk.py`.
+
+Los ejecutables siguen llamándose `fk_node` e `ik_node`; el launch se usa igual.
+Las importaciones de ROS y las clases de los nodos están dentro de `main()`
+para poder importar y probar las funciones matemáticas con NumPy sin ROS.
+Las pruebas se conservan en `test/test_kinematics.py`.
+
+Se mantienen los parámetros previamente validados: tolerancia de 0,1 mm,
+amortiguamiento 0,02, paso máximo de 0,2 rad, hasta 300 iteraciones y reducción
+del paso cuando sea necesario. La semilla inicial sigue siendo la configuración 3.
+Ante un objetivo inválido o sin convergencia, se conserva la última postura válida.
+La orientación no es un objetivo de la IK.

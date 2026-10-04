@@ -3,7 +3,7 @@
 <package format="3">
   <name>grupo03_kuka_kr6_kinematics</name>
   <version>0.0.0</version>
-  <description>TODO: Package description</description>
+  <description>Cinemática directa e inversa de posición del KUKA KR 6 R900 sixx</description>
   <maintainer email="montanocmmc@gmail.com">titi</maintainer>
   <license>TODO: License declaration</license>
 
